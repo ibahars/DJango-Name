@@ -7,10 +7,78 @@
     <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-[#EAEAEA]">
-    <div class="">
-      <div class="my-8 bg-[#B38ECD] px-4 py-4 border-xl rounded-xl w-96"></div>
-      <div></div>
+  <body class="bg-gray-200">
+    <div class="px-4 py-4">
+      <div class="my-8 bg-[#B38ECD] px-4 py-4 border-xl rounded-xl w-126"></div>
+      <div class="flex gap-4">
+        <div
+          class="w-1/2 p-4 border-4 border-white min-h-40 rounded-2xl bg-white"
+        >
+          <div class="m-8">
+            <div class="flex gap-4">
+              <div class="w-1/4 p-1 w-8 h-8 bg-[#6B2189] rounded-full"></div>
+              <div class="w-3/4 p-1 text-3xl">Kullanıcı Adı</div>
+            </div>
+
+            <div class="flex flex-col gap-4 my-8">
+              <div class="flex gap-4">
+                <div class="w-1/5">
+                  <svg width="7*" height="70" viewBox="0 0 178 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.6665 146.25C29.6665 141.277 31.62 136.508 35.0972 132.992C38.5745 129.475 43.2906 127.5 48.2082 127.5H148.333M29.6665 146.25C29.6665 151.223 31.62 155.992 35.0972 159.508C38.5745 163.025 43.2906 165 48.2082 165H148.333V15H48.2082C43.2906 15 38.5745 16.9754 35.0972 20.4917C31.62 24.0081 29.6665 28.7772 29.6665 33.75V146.25Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </div>
+                <div class="w-3/5 p-1 text-3xl">Toplam okunan kitap sayısı</div>
+                <div class="w-1/% p-1 text-3xl">100</div>
+              </div>
+              <div class="flex gap-4">
+                <div class="w-1/5">
+                  <svg width="7*" height="70" viewBox="0 0 178 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.6665 146.25C29.6665 141.277 31.62 136.508 35.0972 132.992C38.5745 129.475 43.2906 127.5 48.2082 127.5H148.333M29.6665 146.25C29.6665 151.223 31.62 155.992 35.0972 159.508C38.5745 163.025 43.2906 165 48.2082 165H148.333V15H48.2082C43.2906 15 38.5745 16.9754 35.0972 20.4917C31.62 24.0081 29.6665 28.7772 29.6665 33.75V146.25Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </div>
+                <div class="w-3/5 p-1 text-3xl">Toplam okunan sayfa sayısı</div>
+                <div class="w-1/% p-1 text-3xl">100</div>
+              </div>
+              <div class="flex gap-4">
+                <div class="w-1/5">
+                  <svg width="7*" height="70" viewBox="0 0 178 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.6665 146.25C29.6665 141.277 31.62 136.508 35.0972 132.992C38.5745 129.475 43.2906 127.5 48.2082 127.5H148.333M29.6665 146.25C29.6665 151.223 31.62 155.992 35.0972 159.508C38.5745 163.025 43.2906 165 48.2082 165H148.333V15H48.2082C43.2906 15 38.5745 16.9754 35.0972 20.4917C31.62 24.0081 29.6665 28.7772 29.6665 33.75V146.25Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </div>
+                <div class="w-3/5 p-1 text-3xl">Toplam okunacak kitap sayısı</div>
+                <div class="w-1/% p-1 text-3xl">100</div>
+              </div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-1/2 p-4 border-4 border-white min-h-40 rounded-2xl bg-white"
+        >
+          <div class="m-8">
+            <div class="flex gap-4">
+              <div class="w-1/4 p-1 w-8 h-8 bg-[#6B2189] rounded-full"></div>
+              <div class="w-3/4 p-1 text-3xl">Kitap Durumu Güncelleme</div>
+            </div>
+
+            <div class="flex gap-4 my-8">
+              <div class="w-2/5 p-1 text-3xl">Kitap Arama</div>
+              <input type="text" placeholder="Kitap ismi girin" 
+                class="w-3/5 h-15 border-2 border-gray-300 rounded-xl p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <div class="w-1/5 p-1 text-3xl">
+                <svg width="40" height="40" viewBox="0 0 184 183" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M150.267 160.125L101.967 112.088C98.1333 115.137 93.725 117.552 88.7417 119.331C83.7583 121.11 78.4556 122 72.8333 122C58.9056 122 47.1181 117.203 37.4708 107.608C27.8236 98.013 23 86.2896 23 72.4375C23 58.5854 27.8236 46.862 37.4708 37.2672C47.1181 27.6724 58.9056 22.875 72.8333 22.875C86.7611 22.875 98.5486 27.6724 108.196 37.2672C117.843 46.862 122.667 58.5854 122.667 72.4375C122.667 78.0292 121.772 83.3031 119.983 88.2594C118.194 93.2156 115.767 97.6 112.7 101.412L161 149.45L150.267 160.125ZM72.8333 106.75C82.4167 106.75 90.5625 103.414 97.2708 96.7422C103.979 90.0703 107.333 81.9688 107.333 72.4375C107.333 62.9062 103.979 54.8047 97.2708 48.1328C90.5625 41.4609 82.4167 38.125 72.8333 38.125C63.25 38.125 55.1042 41.4609 48.3958 48.1328C41.6875 54.8047 38.3333 62.9062 38.3333 72.4375C38.3333 81.9688 41.6875 90.0703 48.3958 96.7422C55.1042 103.414 63.25 106.75 72.8333 106.75Z" fill="#1D1B20"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="bg-gray-200 border-white rounded-xl h-200">
+              Herhangi bir kitap durumu görüntülemek için lütfen arama yapınız
+            </div>
+            
+
+
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
