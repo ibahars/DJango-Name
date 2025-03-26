@@ -63,14 +63,15 @@
               <div class="w-2/5 p-1 text-3xl">Kitap Arama</div>
               <input type="text" placeholder="Kitap ismi girin" 
                 class="w-3/5 h-15 border-2 border-gray-300 rounded-xl p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <div class="w-1/5 p-1 text-3xl">
+             
+                <div class="w-1/5 p-1 text-3xl">
                 <svg width="40" height="40" viewBox="0 0 184 183" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M150.267 160.125L101.967 112.088C98.1333 115.137 93.725 117.552 88.7417 119.331C83.7583 121.11 78.4556 122 72.8333 122C58.9056 122 47.1181 117.203 37.4708 107.608C27.8236 98.013 23 86.2896 23 72.4375C23 58.5854 27.8236 46.862 37.4708 37.2672C47.1181 27.6724 58.9056 22.875 72.8333 22.875C86.7611 22.875 98.5486 27.6724 108.196 37.2672C117.843 46.862 122.667 58.5854 122.667 72.4375C122.667 78.0292 121.772 83.3031 119.983 88.2594C118.194 93.2156 115.767 97.6 112.7 101.412L161 149.45L150.267 160.125ZM72.8333 106.75C82.4167 106.75 90.5625 103.414 97.2708 96.7422C103.979 90.0703 107.333 81.9688 107.333 72.4375C107.333 62.9062 103.979 54.8047 97.2708 48.1328C90.5625 41.4609 82.4167 38.125 72.8333 38.125C63.25 38.125 55.1042 41.4609 48.3958 48.1328C41.6875 54.8047 38.3333 62.9062 38.3333 72.4375C38.3333 81.9688 41.6875 90.0703 48.3958 96.7422C55.1042 103.414 63.25 106.75 72.8333 106.75Z" fill="#1D1B20"/>
                 </svg>
               </div>
             </div>
 
-            <div class="bg-gray-200 border-white rounded-xl h-200">
+            <div id="result-area" class="p-4 bg-gray-200 border-white rounded-xl h-200">
               Herhangi bir kitap durumu görüntülemek için lütfen arama yapınız
             </div>
             
@@ -81,4 +82,26 @@
       </div>
     </div>
   </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const input = document.querySelector('input[type="text"]');
+      const resultArea = document.getElementById('result-area');
+  
+      input.addEventListener('input', function () {
+        const query = input.value;
+  
+        if (query.length === 0) {
+          resultArea.innerHTML = 'Herhangi bir kitap durumu görüntülemek için lütfen arama yapınız';
+          return;
+        }
+  
+        fetch(`/search?q=${query}`)
+          .then(response => response.text())
+          .then(html => {
+            resultArea.innerHTML = html;
+          });
+      });
+    });
+  </script>
+  
 </html>
