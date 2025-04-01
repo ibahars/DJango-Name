@@ -1,9 +1,15 @@
 {% for book in books %}
-<div class="p-2 border-b">
-  <p><strong>{{ book.name }}</strong></p>
-  <p>Yazar: {{ book.author }}</p>
-  <p>Sayfa: {{ book.page }}</p>
+<div class="flex space-x-6">
+  <div class="p-2 border-b">
+    <p><strong>{{ book.name }}</strong></p>
+    <p>Yazar: {{ book.author }}</p>
+    <p>Sayfa: {{ book.page }}</p>
+  </div>
+  <div class="p-8 border-b">
+    <button>buton</button>
+  </div>
 </div>
+
 {% empty %}
 <div class="p-4 text-gray-600">Hiçbir kitap bulunamadı.</div>
 {% endfor %}
