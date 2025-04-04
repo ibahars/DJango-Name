@@ -3,6 +3,7 @@ from .models import User
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
+from users.models import User
 
 
 def create_account_view(request):
@@ -38,7 +39,11 @@ def login_view(request):
         
         if check_password(password , user.password):
             messages.success(request, 'giriş başarılı, hoş geldiniz!')
-            return redirect('/')
+
+            response = redirect('/')
+            response.set_cookie('auth_token', 'your_token_value', max_age=3600)
+            return response
+        
         else:
             messages.error(request ,'şifre yanlış!')
             return redirect('/login')
