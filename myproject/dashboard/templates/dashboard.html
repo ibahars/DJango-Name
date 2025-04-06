@@ -102,11 +102,11 @@
           .then(response => response.text())
           .then(html => {
             resultArea.innerHTML = html;
-            setupSaveButtons(); // <--- burada çalıştıracağız
+            setupSaveButtons(); 
           });
       });
   
-      // 🌟 Butonlara click eventi ekleyen fonksiyon
+      
       function setupSaveButtons() {
         document.querySelectorAll("#result-area button").forEach((btn) => {
           btn.addEventListener("click", function () {

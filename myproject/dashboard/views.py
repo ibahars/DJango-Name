@@ -38,13 +38,13 @@ def save_status(request):
         page = int(data.get('page'))
         status_value = data.get('status')
 
-        # Kitabı bul ya da oluştur
+        # Kitabı bulma ya da oluştur
         book, _ = Book.objects.get_or_create(name=bookname, author=author, page=page)
 
-        # Aynı kullanıcı ve kitap için varsa eski status kaydını sil
+        # Aynı kullanıcı ve kitap için varsa eski status kaydını silme
         Status.objects.filter(userid=user, bookid=book).delete()
 
-        # Yeni kaydı oluştur
+        # Yeni kaydı oluşturma
         Status.objects.create(
             userid=user,
             username=user.name,
