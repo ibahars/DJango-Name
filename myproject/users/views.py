@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from users.models import User
-
+import uuid
 
 def create_account_view(request):
     if request.method == 'POST':
@@ -26,6 +26,7 @@ def create_account_view(request):
 
     return render(request, 'create_account.html')
 
+
 def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('Email')
@@ -34,20 +35,22 @@ def login_view(request):
         try:
             user = User.objects.get(email=email) 
         except User.DoesNotExist:
-            messages.error("böyle bir kullanıcı bulunamadı!")
+            messages.error(request, "böyle bir kullanıcı bulunamadı!")
             return redirect('/login')
         
-        if check_password(password , user.password):
+        if check_password(password, user.password):
             messages.success(request, 'giriş başarılı, hoş geldiniz!')
 
+            token = str(uuid.uuid4())  # rastgele benzersiz token
+            user.token = token  # User modeline 'token' alanı eklenecek
+            user.save()
+
             response = redirect('/')
-            response.set_cookie('auth_token', 'your_token_value', max_age=3600)
+            response.set_cookie('auth_token', token, max_age=3600)
             return response
         
         else:
-            messages.error(request ,'şifre yanlış!')
+            messages.error(request, 'şifre yanlış!')
             return redirect('/login')
     
     return render(request, 'login.html')
-
-        

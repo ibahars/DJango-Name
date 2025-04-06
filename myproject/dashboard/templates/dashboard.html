@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   </body>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -102,8 +102,60 @@
           .then(response => response.text())
           .then(html => {
             resultArea.innerHTML = html;
+            setupSaveButtons(); // <--- burada çalıştıracağız
           });
       });
+  
+      // 🌟 Butonlara click eventi ekleyen fonksiyon
+      function setupSaveButtons() {
+        document.querySelectorAll("#result-area button").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const selectEl = this.previousElementSibling;
+            const status = selectEl.value;
+            if (status === "Durum Seçiniz") {
+              alert("Lütfen bir durum seçin.");
+              return;
+            }
+  
+            const bookName = this.closest("div.flex").querySelector("strong").innerText;
+            const author = this.closest("div.flex").querySelector("p:nth-child(2)").innerText.replace("Yazar: ", "");
+            const page = this.closest("div.flex").querySelector("p:nth-child(3)").innerText.replace("Sayfa: ", "");
+  
+            fetch("/save_status/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken"),
+              },
+              body: JSON.stringify({
+                bookname: bookName,
+                author: author,
+                page: page,
+                status: status,
+              }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                alert(data.message);
+              });
+          });
+        });
+      }
+  
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
     });
   </script>
   
