@@ -83,6 +83,9 @@
           </div>
         </div>
       </div>
+      <div id="logout" class="p-12 flex justify-center items-center w-full">
+        <button class="justify-center items-center px-4 py-2 bg-[#B38ECD] text-white font-medium rounded-xl w-36">Çıkış Yap</button>
+      </div>
     </div> 
   </body>
   <script>
@@ -157,6 +160,13 @@
         return cookieValue;
       }
     });
+
+    document.getElementById('logout').querySelector('button').addEventListener('click',function(){
+      document.cookie = "uth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = '/login'
+    })
   </script>
   
 </html>
