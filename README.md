@@ -11,15 +11,15 @@ Installation
 Follow the steps below to set up the project locally:
 
 1. Clone the Repository
-2. Create a Virtual Environment
-  python -m venv venv
+2. Create a Virtual Environment: 
+  python -m venv venv ,
   source venv/bin/activate  # On Windows: venv\Scripts\activate
-3. Install Dependencies
+3. Install Dependencies:
   pip install -r requirements.txt
-4. Set Up the Database
-  python manage.py makemigrations
+4. Set Up the Database:
+  python manage.py makemigrations ,
   python manage.py migrate
-5. Create a Superuser
+5. Create a Superuser:
   python manage.py createsuperuser
-6. Run the Development Server
+6. Run the Development Server:
   python manage.py runserver
