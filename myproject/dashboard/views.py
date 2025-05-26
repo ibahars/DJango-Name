@@ -7,6 +7,8 @@ from users.models import User
 import json
 
 
+from django.db.models import Sum
+
 def dashboard_view(request):
     token = request.COOKIES.get('auth_token')
     user = User.objects.filter(token=token).first()
@@ -14,7 +16,26 @@ def dashboard_view(request):
     if not user:
         return redirect('/login')
 
-    return render(request, 'dashboard.html', {'user': user})
+    # Toplam "Okudum" kitap sayısı
+    read_books = Status.objects.filter(userid=user, status='okudum').count()
+
+    # Toplam "Okudum" sayfa sayısı
+    total_read_pages = Status.objects.filter(userid=user, status='okudum').aggregate(
+        total=Sum('bookpage')
+    )['total'] or 0
+
+    # Toplam "Okuyacağım" kitap sayısı
+    to_read_books = Status.objects.filter(userid=user, status='okuyacağım').count()
+
+    context = {
+        'user': user,
+        'read_books': read_books,
+        'total_read_pages': total_read_pages,
+        'to_read_books': to_read_books
+    }
+
+    return render(request, 'dashboard.html', context)
+
 
 def search_book(request):
     query = request.GET.get('q')

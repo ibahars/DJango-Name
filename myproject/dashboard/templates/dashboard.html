@@ -20,7 +20,7 @@
           <div class="m-8">
             <div class="flex gap-4">
               <div class="w-1/4 p-1 w-8 h-8 bg-[#6B2189] rounded-full"></div>
-              <div class="w-3/4 p-1 text-3xl">Kullanıcı Adı</div>
+              <div class="w-3/4 p-1 text-3xl">İstatistikler</div>
             </div>
 
             <div class="flex flex-col gap-4 my-8">
@@ -30,7 +30,7 @@
                     <path d="M29.6665 146.25C29.6665 141.277 31.62 136.508 35.0972 132.992C38.5745 129.475 43.2906 127.5 48.2082 127.5H148.333M29.6665 146.25C29.6665 151.223 31.62 155.992 35.0972 159.508C38.5745 163.025 43.2906 165 48.2082 165H148.333V15H48.2082C43.2906 15 38.5745 16.9754 35.0972 20.4917C31.62 24.0081 29.6665 28.7772 29.6665 33.75V146.25Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                 </div>
                 <div class="w-3/5 p-1 text-3xl">Toplam okunan kitap sayısı</div>
-                <div class="w-1/% p-1 text-3xl">100</div>
+                <div class="w-1/% p-1 text-3xl">{{ read_books }}</div>
               </div>
               <div class="flex gap-4">
                 <div class="w-1/5">
@@ -38,7 +38,7 @@
                     <path d="M29.6665 146.25C29.6665 141.277 31.62 136.508 35.0972 132.992C38.5745 129.475 43.2906 127.5 48.2082 127.5H148.333M29.6665 146.25C29.6665 151.223 31.62 155.992 35.0972 159.508C38.5745 163.025 43.2906 165 48.2082 165H148.333V15H48.2082C43.2906 15 38.5745 16.9754 35.0972 20.4917C31.62 24.0081 29.6665 28.7772 29.6665 33.75V146.25Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                 </div>
                 <div class="w-3/5 p-1 text-3xl">Toplam okunan sayfa sayısı</div>
-                <div class="w-1/% p-1 text-3xl">100</div>
+                <div class="w-1/% p-1 text-3xl">{{ total_read_pages }}</div>
               </div>
               <div class="flex gap-4">
                 <div class="w-1/5">
@@ -46,7 +46,7 @@
                     <path d="M29.6665 146.25C29.6665 141.277 31.62 136.508 35.0972 132.992C38.5745 129.475 43.2906 127.5 48.2082 127.5H148.333M29.6665 146.25C29.6665 151.223 31.62 155.992 35.0972 159.508C38.5745 163.025 43.2906 165 48.2082 165H148.333V15H48.2082C43.2906 15 38.5745 16.9754 35.0972 20.4917C31.62 24.0081 29.6665 28.7772 29.6665 33.75V146.25Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                 </div>
                 <div class="w-3/5 p-1 text-3xl">Toplam okunacak kitap sayısı</div>
-                <div class="w-1/% p-1 text-3xl">100</div>
+                <div class="w-1/% p-1 text-3xl">{{ to_read_books }}</div>
               </div>
               <div></div>
               <div></div>
@@ -167,6 +167,23 @@
       sessionStorage.clear();
       window.location.href = '/login'
     })
+    function loadStatistics() {
+  fetch('/statistics/')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('read-books-count').textContent = data.read_books;
+      document.getElementById('read-pages-count').textContent = data.total_read_pages;
+      document.getElementById('to-read-books-count').textContent = data.to_read_books;
+    })
+    .catch(error => {
+      console.error('İstatistikler alınamadı:', error);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  loadStatistics(); // Sayfa yüklenince istatistikleri getir
+});
+
   </script>
   
 </html>

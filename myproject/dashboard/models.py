@@ -1,6 +1,32 @@
 from django.db import models
+from django.http import JsonResponse
 from users.models import User
+from django.views.decorators.http import require_GET
 
+@require_GET
+def user_statistics(request):
+    token = request.COOKIES.get('auth_token')
+    user = User.objects.filter(token=token).first()
+
+    if not user:
+        return JsonResponse({'error': 'Kullanıcı bulunamadı'}, status=401)
+
+    # "Okudum" olan kitap sayısı
+    read_books = Status.objects.filter(userid=user, status='Okudum').count()
+
+    # "Okudum" olan kitapların toplam sayfa sayısı
+    total_read_pages = Status.objects.filter(userid=user, status='Okudum').aggregate(
+        total=models.Sum('bookpage')
+    )['total'] or 0
+
+    # "Okuyacağım" olan kitap sayısı
+    to_read_books = Status.objects.filter(userid=user, status='Okuyacağım').count()
+
+    return JsonResponse({
+        'read_books': read_books,
+        'total_read_pages': total_read_pages,
+        'to_read_books': to_read_books
+    })
 
 class Book(models.Model):
     name = models.CharField(max_length=255)
