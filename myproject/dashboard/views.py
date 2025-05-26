@@ -5,9 +5,28 @@ from django.shortcuts import render, redirect
 from users.models import User
 from users.models import User
 import json
-
-
+import random
 from django.db.models import Sum
+
+def magic_suggestion(request):
+    token = request.COOKIES.get('auth_token')
+    user = User.objects.filter(token=token).first()
+    if not user:
+        return JsonResponse({'error': 'Kullanıcı bulunamadı'}, status=401)
+
+    used_books = Status.objects.filter(userid=user).values_list('bookid', flat=True)
+    unread_books = Book.objects.exclude(id__in=used_books)
+
+    if not unread_books.exists():
+        return JsonResponse({'message': 'Tüm kitapları zaten okumuşsun!'})
+
+    suggestion = random.choice(list(unread_books))
+
+    return JsonResponse({
+        'name': suggestion.name,
+        'author': suggestion.author,
+        'page': suggestion.page
+    })
 
 def dashboard_view(request):
     token = request.COOKIES.get('auth_token')

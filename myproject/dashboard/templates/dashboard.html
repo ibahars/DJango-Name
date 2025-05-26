@@ -77,14 +77,17 @@
             <div id="result-area" class="p-4 bg-gray-200 border-white rounded-xl h-200 ">
               Herhangi bir kitap durumu görüntülemek için lütfen arama yapınız
             </div>
-            
-
-
           </div>
         </div>
       </div>
-      <div id="logout" class="p-12 flex justify-center items-center w-full">
-        <button class="justify-center items-center px-4 py-2 bg-[#B38ECD] text-white font-medium rounded-xl w-36">Çıkış Yap</button>
+      <div id="suggestion"  class="w-full bg-white rounded-2xl p-4 flex justify-center items-center m-2">
+         <button id="suggest-btn" class="text-lg font-semibold py-2 bg-[#B38ECD] text-white rounded-xl w-36">
+          sihirli öneri
+        </button>
+        <div id="suggestion-result" class="text-center text-gray-800 text-lg"></div>
+      </div>
+      <div id="logout" class="w-full rounded-2xl p-4 flex justify-center items-center m-2">
+        <button class="text-lg font-semibold py-2 bg-[#B38ECD] text-white rounded-xl w-36">Çıkış Yap</button>
       </div>
     </div> 
   </body>
@@ -181,9 +184,28 @@
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  loadStatistics(); // Sayfa yüklenince istatistikleri getir
+  loadStatistics(); // Sayfa yüklenince istatistikleri getirir
 });
-
+document.getElementById('suggest-btn').addEventListener('click', function () {
+  fetch('/magic_suggestion/')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('suggest-btn').style.display = 'none';
+      const resultDiv = document.getElementById('suggestion-result');
+      if (data.message) {
+        resultDiv.innerHTML = `<p class="text-gray-600">${data.message}</p>`;
+      } else {
+        resultDiv.innerHTML = `
+          <p class="font-bold text-xl mb-1">${data.name}</p>
+          <p class="text-gray-700"><b>Yazarı:</b> ${data.author}</p>
+          <p class="text-gray-700"><b>Sayfa sayısı</b>: ${data.page}</p>
+        `;
+      }
+    })
+    .catch(err => {
+      console.error('Sihirli öneri hatası:', err);
+    });
+});
   </script>
   
 </html>
