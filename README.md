@@ -1,13 +1,13 @@
 PageFlow
 PageFlow is a basic school project developed using the Django web framework. It is a web application that allows users to create and manage content through a clean and structured interface. The project must be run inside the myproject directory.
 
-Features
-  User registration and login system
-  Content creation and editing
-  Content listing and detailed view
+Features:
+  User registration and login system,
+  Content creation and editing,
+  Content listing and detailed view,
   Admin panel for managing users and content
 
-Installation
+Installation:
 Follow the steps below to set up the project locally:
 
 1. Clone the Repository
